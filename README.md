@@ -12,30 +12,15 @@ The train function is a training loop for a neural network model.  This function
 The test function is used to evaluate a trained model on a test dataset.  It iterates over the test dataset makes predictions and accumulates test loss. Later it calculates the average loss and accuracy 
 
 ## 2. model.py  
-This script defines the neural network model 
-
-class Net(nn.Module):
-    #This defines the structure of the NN.
-    def __init__(self):
-        super(Net, self).__init__()
-        self.conv1 = nn.Conv2d(1, 32, kernel_size=3)-   ####Defines the first convolutional layer with 1 input channel, 32 output channels, and a kernel size of 3x3.
-        self.conv2 = nn.Conv2d(32, 64, kernel_size=3)
-        self.conv3 = nn.Conv2d(64, 128, kernel_size=3)
-        self.conv4 = nn.Conv2d(128, 256, kernel_size=3)
-        self.fc1 = nn.Linear(4096, 50)
-        self.fc2 = nn.Linear(50, 10)
-
-    def forward(self, x):
-        x = F.relu(self.conv1(x), 2)
-        x = F.relu(F.max_pool2d(self.conv2(x), 2)) 
-        x = F.relu(self.conv3(x), 2)
-        x = F.relu(F.max_pool2d(self.conv4(x), 2)) 
-        x = x.view(-1, 4096)
-        x = F.relu(self.fc1(x))
-        x = self.fc2(x)
-        return F.log_softmax(x, dim=1)
-
-
+This script defines the CNN model with 4 convolution layers and 2 fully connected layers.The forward method specifies the forward pass computation. 
+In the constructor method , layers of neural network are defined.  
+    a. first convolutional layer with 1 input channel, 32 output channels, and a kernel size of 3x3.
+    b. second convolutional layer with 32 input channels, 64 output channels, and a kernel size of 3x3.
+    c. third convolutional layer with 64 input channels, 128 output channels, and a kernel size of 3x3.
+    d. fourth convolutional layer with 128 input channels, 256 output channels, and a kernel size of 3x3.
+    e. first fully connected (linear) layer with 4096 input features and 50 output features.
+    f. second fully connected layer with 50 input features and 10 output features.
 
 ## 3. s5.ipynb  
-This is the main file where the Mnist dataset is downloaded and transformations applied on train and test dataset. 
+This is the main file where the Mnist dataset is downloaded and transformations are applied on train and test dataset. 
+This is also where the model object is instantiated and train and test functions are called .Graphs of train and test accuracy and loss are shown as an output. 
